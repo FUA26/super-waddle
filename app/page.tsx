@@ -1,13 +1,13 @@
-import { allPosts, Post } from 'contentlayer/generated';
+import { allBlogs, Blog } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 import Link from 'next/link';
 
-function PostCard(post: Post) {
-  console.log(post.url)
+function PostCard(post: Blog) {
+  
   return (
     <div className='mb-8'>
       <h2 className='mb-1 text-xl'>
-        <Link href={post.url} className='text-blue-700 hover:text-blue-900'>
+        <Link href={post.path} className='text-blue-700 hover:text-blue-900'>
           {post.title}
         </Link>
       </h2>
@@ -20,7 +20,7 @@ function PostCard(post: Post) {
 }
 
 export default function Home() {
-  const posts = allPosts.sort((a, b) =>
+  const posts = allBlogs.sort((a, b) =>
     compareDesc(new Date(a.date), new Date(b.date))
   );
 

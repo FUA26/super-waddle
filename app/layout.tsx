@@ -1,6 +1,14 @@
+import "./globals.css";
+import 'pliny/search/algolia.css'
+import 'remark-github-blockquote-alert/alert.css'
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import SectionContainer from "@/components/common/SectionContainer";
+import { SearchConfig, SearchProvider } from "pliny/search/index.js";
+import siteMetadata from "@/config/siteMetadata";
+import { ThemeProviders } from "./theme-providers";
+import Header from "@/components/layouts/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +31,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
+        <ThemeProviders>
+        <SectionContainer>
+            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <Header />
+              <main className="mb-auto">{children}</main>
+            </SearchProvider>
+            {/* <Footer /> */}
+          </SectionContainer>
+          </ThemeProviders>
       </body>
     </html>
   );

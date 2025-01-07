@@ -1,29 +1,17 @@
-import { getMDXComponent, useMDXComponent } from 'next-contentlayer2/hooks';
+import TOCInline from 'pliny/ui/TOCInline.js'
+import Pre from 'pliny/ui/Pre.js'
+import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm.js'
+import type { MDXComponents } from 'mdx/types'
+import CustomLink from '../common/Link'
+import TableWrapper from '../common/TableWrapper'
+import Image from '../common/Image'
 
-const components = {
-  h1: ({ ...props }) => (
-    <h1
-      className={'mt-2 text-4xl font-bold tracking-tight text-red-300'}
-      {...props}
-    />
-  ),
-  h2: ({ ...props }) => (
-    <h2
-      className={'mt-10 pb-1 text-3xl font-semibold tracking-tight'}
-      {...props}
-    />
-  ),
-  p: ({ ...props }) => <p className='mt-8 text-base leading-7' {...props} />,
-};
 
-interface MdxProps {
-  code: string;
-}
-export default function Mdx({ code }: MdxProps) {
-  const Component = useMDXComponent(code);
-  return (
-    <div>
-      <Component components={components} />
-    </div>
-  );
+export const components: MDXComponents = {
+  Image,
+  TOCInline,
+  a: CustomLink,
+  pre: Pre,
+  table: TableWrapper,
+  BlogNewsletterForm,
 }
