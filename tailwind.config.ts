@@ -1,5 +1,11 @@
 import type { Config } from "tailwindcss";
-const colors = require('tailwindcss/colors')
+import colors from 'tailwindcss/colors';
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+import animate from "tailwindcss-animate";
+
+/** @type {import('tailwindcss').Config} */
+
 export default {
   content: [
     './node_modules/pliny/**/*.js',
@@ -16,13 +22,56 @@ export default {
         13: '3.25rem',
         14: '3.5rem',
       },
+      // colors: {
+      //   primary: colors.pink,
+      //   gray: colors.gray,
+      //   background: "var(--background)",
+      //   foreground: "var(--foreground)",
+      // },
       colors: {
-        primary: colors.pink,
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        // primary: colors.pink,
         gray: colors.gray,
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          ...colors.pink,
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: "calc(var(--radius) - 4px)",
       },
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [forms, typography, animate],
 } satisfies Config;
